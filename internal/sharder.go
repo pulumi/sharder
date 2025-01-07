@@ -50,8 +50,7 @@ func ProcessJSON(filepath string) ([]TestRun, error) {
 			return nil, fmt.Errorf("failed to parse JSON: %w", err)
 		}
 
-		// Apply the filter: Action == "pass" and Test != null
-		if record.Action == "pass" && record.Test != nil {
+		if (record.Action == "pass" || record.Action == "fail") && record.Test != nil {
 			records = append(records, TestRun{
 				Test:    *record.Test,
 				Elapsed: record.Elapsed,
