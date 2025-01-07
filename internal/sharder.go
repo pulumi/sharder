@@ -149,20 +149,6 @@ func PackShards(tests []TestRun, total int, seed int64) []Bin {
 	return bins
 }
 
-// escape regex special characters .^$*+?()[{\|
-func escapeName(name string) string {
-	specialChars := []string{".", "^", "$", "*", "+", "?", "(", ")", "[", "{", "\\", "|"}
-	escaped := name
-	for _, char := range specialChars {
-		escaped = strings.ReplaceAll(escaped, char, "\\"+char)
-	}
-
-	// escape single quotes
-	escaped = strings.ReplaceAll(escaped, "'", "'\\''")
-
-	return escaped
-}
-
 func generateOutputLast(bins []Bin) string {
 	names := make([]string, 0)
 	for _, bin := range bins {
@@ -173,11 +159,10 @@ func generateOutputLast(bins []Bin) string {
 
 	pattern := ""
 	for _, name := range names {
-		pattern += fmt.Sprintf(`(^%s$)|`, escapeName(name))
+		pattern += fmt.Sprintf(`(^%s$)|`, name)
 	}
 	pattern = strings.TrimSuffix(pattern, "|")
-	pattern = "'" + pattern + "'"
-
+	pattern = "\"" + pattern + "\""
 	return "-skip " + pattern
 }
 
@@ -189,11 +174,10 @@ func generateOutputNotLast(bins []Bin, shard int) string {
 
 	pattern := ""
 	for _, name := range names {
-		pattern += fmt.Sprintf(`(^%s$)|`, escapeName(name))
+		pattern += fmt.Sprintf(`(^%s$)|`, name)
 	}
 	pattern = strings.TrimSuffix(pattern, "|")
-	pattern = "'" + pattern + "'"
-
+	pattern = "\"" + pattern + "\""
 	return "-run " + pattern
 }
 

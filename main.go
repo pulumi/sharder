@@ -37,7 +37,7 @@ func main() {
 	}
 
 	if *format == "env" {
-		fmt.Fprintf(os.Stdout, "%s=%s", "SHARD_CMD", pattern)
+		fmt.Fprintf(os.Stdout, "%s=%s", "SHARD_CMD", "'"+pattern+"'")
 	} else {
 		fmt.Fprintln(os.Stdout, pattern)
 	}
