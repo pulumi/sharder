@@ -32,6 +32,7 @@ func TestShard(t *testing.T) {
 	}
 
 	expected := []TestRun{
+		{Test: "test2", Elapsed: 2.34},
 		{Test: "test1", Elapsed: 1.23},
 		{Test: "test3", Elapsed: 0.56},
 	}
@@ -162,7 +163,7 @@ func TestGenerateOutput(t *testing.T) {
 		t.Fatalf("Error generating output: %v", err)
 	}
 
-	expected := `-run '(^long_test2$)|(^long_test3$)|(^short_test1$)|(^short_test3$)'`
+	expected := `-run "(^long_test2$)|(^long_test3$)|(^short_test1$)|(^short_test3$)"`
 	if pattern != expected {
 		t.Errorf("Expected %v, got %v", expected, pattern)
 	}

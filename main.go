@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/VenelinMartinov/sharder/internal"
 )
@@ -36,8 +37,9 @@ func main() {
 		log.Fatalf("Error generating output: %v", err)
 	}
 
-	if *format == "env" {
-		fmt.Fprintf(os.Stdout, "%s=%s", "SHARD_CMD", "'"+pattern+"'")
+	if *format == "make" {
+		pattern = strings.ReplaceAll(pattern, "$", "\\$$")
+		fmt.Fprintln(os.Stdout, pattern)
 	} else {
 		fmt.Fprintln(os.Stdout, pattern)
 	}
