@@ -197,14 +197,14 @@ func generateOutputNotLast(bins []Bin, shard int) string {
 	return "-run " + pattern
 }
 
-func GenerateOutput(bins []Bin, shard int) (string, error) {
-	if shard < 0 || shard >= len(bins) {
-		return "", fmt.Errorf("shard %d is out of bounds", shard)
+func GenerateOutput(bins []Bin, index int) (string, error) {
+	if index < 0 || index >= len(bins) {
+		return "", fmt.Errorf("shard %d is out of bounds", index)
 	}
 
-	if shard == len(bins)-1 {
+	if index == len(bins)-1 {
 		return generateOutputLast(bins), nil
 	}
 
-	return generateOutputNotLast(bins, shard), nil
+	return generateOutputNotLast(bins, index), nil
 }

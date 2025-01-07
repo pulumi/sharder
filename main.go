@@ -13,7 +13,7 @@ func main() {
 	outputFile := flag.String("output", "", "output file containing the test run times")
 	seed := flag.Int64("seed", 0, "randomly shuffle tests using this seed")
 	total := flag.Int("total", 1, "total number of shards")
-	shard := flag.Int("shard", 0, "shard number")
+	index := flag.Int("index", 0, "shard index")
 	format := flag.String("format", "", "output format")
 
 	flag.Parse()
@@ -31,7 +31,7 @@ func main() {
 
 	shards := internal.PackShards(result, *total, *seed)
 
-	pattern, err := internal.GenerateOutput(shards, *shard)
+	pattern, err := internal.GenerateOutput(shards, *index)
 	if err != nil {
 		log.Fatalf("Error generating output: %v", err)
 	}
