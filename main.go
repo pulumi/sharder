@@ -14,6 +14,7 @@ func main() {
 	seed := flag.Int64("seed", 0, "randomly shuffle tests using this seed")
 	total := flag.Int("total", 1, "total number of shards")
 	shard := flag.Int("shard", 0, "shard number")
+	format := flag.String("format", "", "output format")
 
 	flag.Parse()
 
@@ -35,5 +36,9 @@ func main() {
 		log.Fatalf("Error generating output: %v", err)
 	}
 
-	fmt.Fprintln(os.Stdout, pattern)
+	if *format == "env" {
+		fmt.Fprintf(os.Stdout, "%s=%s", "SHARD_CMD", pattern)
+	} else {
+		fmt.Fprintln(os.Stdout, pattern)
+	}
 }
