@@ -23,7 +23,7 @@ jobs:
         shard: [0, 1, 2, 3]
   steps:
     - name: Shard tests
-      run: go run github.com/VenelinMartinov/sharder --output=outputdata.json --total ${{ strategy.job-total }} --index ${{ strategy.job-index }} > tests
+      run: go run github.com/pulumi/sharder --output=outputdata.json --total ${{ strategy.job-total }} --index ${{ strategy.job-index }} > tests
     - name: Run tests
       run: go test $(cat tests)
 ```

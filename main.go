@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/VenelinMartinov/sharder/internal"
+	"github.com/pulumi/sharder/internal"
 )
 
 func main() {
