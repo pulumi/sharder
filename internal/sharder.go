@@ -23,6 +23,12 @@ func sortRuns(runs *[]TestRun) {
 		if a.Elapsed < b.Elapsed {
 			return 1
 		}
+		if a.Test > b.Test {
+			return -1
+		}
+		if a.Test < b.Test {
+			return 1
+		}
 		return 0
 	})
 }
@@ -151,7 +157,9 @@ func PackShards(tests []TestRun, total int, seed int64) []Bin {
 
 func generateOutputLast(bins []Bin) string {
 	names := make([]string, 0)
-	for _, bin := range bins {
+	// skip the last bin since it's the one we're running
+	// we'll negate all the other bins
+	for _, bin := range bins[0 : len(bins)-1] {
 		for _, test := range bin.Tests {
 			names = append(names, test.Test)
 		}

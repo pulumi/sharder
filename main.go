@@ -19,28 +19,51 @@ func main() {
 
 	flag.Parse()
 
-	if *outputFile == "" {
-		log.Fatalf("Error: output file is required")
+	out, err := run(runInput{
+		OutputFile: *outputFile,
+		Seed:       *seed,
+		Total:      *total,
+		Index:      *index,
+		Format:     *format,
+	})
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	result, err := internal.ProcessJSON(*outputFile)
+	fmt.Fprintln(os.Stdout, out)
+}
+
+type runInput struct {
+	OutputFile string
+	Seed       int64
+	Total      int
+	Index      int
+	Format     string
+}
+
+func run(input runInput) (string, error) {
+	if input.OutputFile == "" {
+		return "", fmt.Errorf("error: output file is required")
+	}
+
+	result, err := internal.ProcessJSON(input.OutputFile)
 	if err != nil {
-		log.Fatalf("Error processing JSON: %v", err)
+		return "", fmt.Errorf("error processing JSON: %w", err)
 	}
 
 	result = internal.Aggregate(result)
 
-	shards := internal.PackShards(result, *total, *seed)
+	shards := internal.PackShards(result, input.Total, input.Seed)
 
-	pattern, err := internal.GenerateOutput(shards, *index)
+	pattern, err := internal.GenerateOutput(shards, input.Index)
 	if err != nil {
-		log.Fatalf("Error generating output: %v", err)
+		return "", fmt.Errorf("error generating output: %w", err)
 	}
 
-	if *format == "make" {
+	if input.Format == "make" {
 		pattern = strings.ReplaceAll(pattern, "$", "\\$$")
-		fmt.Fprintln(os.Stdout, pattern)
-	} else {
-		fmt.Fprintln(os.Stdout, pattern)
+		return pattern, nil
 	}
+
+	return pattern, nil
 }

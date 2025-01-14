@@ -1,0 +1,9 @@
+{"Time":"2025-01-14T14:23:33.442842+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"test1","Elapsed":1}
+{"Time":"2025-01-14T14:23:33.442866+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"test2","Elapsed":2}
+{"Time":"2025-01-14T14:23:33.4432+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"test3","Elapsed":3}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"test4","Elapsed":1}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"short1","Elapsed":0.1}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"short2","Elapsed":0.2}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"short3","Elapsed":0.3}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"short4","Elapsed":0.4}
+{"Time":"2025-01-14T14:23:33.443226+02:00","Action":"pass","Package":"github.com/pulumi/sharder/internal","Test":"short5","Elapsed":0.1}
